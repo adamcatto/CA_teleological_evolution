@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CA XOR — viewer</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Cellular automaton viewer</h1>
+    <div class="row">
+      <label>Data source
+        <select id="sourceMode">
+          <option value="live">Live stream (this session)</option>
+          <option value="history">History (pick episode)</option>
+        </select>
+      </label>
+      <label>Session
+        <select id="sessionSelect"></select>
+        <input type="text" id="sessionManual" placeholder="e.g. outs/myrun" size="24" />
+        <button type="button" id="applySession">Apply</button>
+      </label>
+    </div>
+    <div class="row" id="historyControls" hidden>
+      <label>Episode
+        <select id="episodeSelect"></select>
+      </label>
+    </div>
+    <div class="row" id="liveOptions">
+      <label><input type="checkbox" id="pretrainShowBest" /> Pretrain: show <strong>best in rolling window</strong> (not latest frame)</label>
+      <label>Poll (ms) <input type="number" id="pollMs" value="1200" min="200" step="100" style="width:5rem" /></label>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel left">
+      <h2>Rules &amp; run info</h2>
+      <div class="left-subhead">Curriculum stage</div>
+      <div id="curriculumStage" class="curriculum-stage" title="From episode extra (train.py / viewer log)">—</div>
+      <div class="left-subhead">Cell counts (current frame)</div>
+      <div id="cellCounts" class="cell-counts"></div>
+      <div class="left-subhead">Curves</div>
+      <label class="curve-toggle">
+        <input type="checkbox" id="showMetricsCharts" /> Show reward &amp; loss
+        <span class="curve-hint">(metrics.jsonl in session folder)</span>
+      </label>
+      <div id="metricsChartsWrap" class="metrics-charts" hidden>
+        <div class="chart-row">
+          <span class="chart-title">Reward</span>
+          <canvas id="chartReward" class="metric-canvas" width="400" height="100"></canvas>
+        </div>
+        <div class="chart-row">
+          <span class="chart-title">Loss</span>
+          <canvas id="chartLoss" class="metric-canvas" width="400" height="100"></canvas>
+        </div>
+        <p id="metricsChartStatus" class="metrics-status"></p>
+      </div>
+      <div id="runMeta" class="meta"></div>
+      <div id="rulesList" class="rules-list"></div>
+    </aside>
+    <main class="panel right">
+      <h2>Grid <span id="gridTitle"></span></h2>
+      <div class="toolbar">
+        <label>Time step
+          <input type="range" id="timeSlider" min="0" max="0" value="0" />
+          <span id="timeLabel">0 / 0</span>
+        </label>
+        <label><input type="checkbox" id="pixelated" checked /> Crisp pixels</label>
+      </div>
+      <div class="grid-wrap">
+        <canvas id="gridCanvas" width="800" height="600"></canvas>
+      </div>
+      <div class="legend" id="legend"></div>
+    </main>
+  </div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

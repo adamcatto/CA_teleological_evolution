@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "stage": "pretrain_grid",
+  "mode": "grid_and_rules",
+  "grid_size": 16,
+  "grid_latent_dim": 32,
+  "grid_start_spatial": 2,
+  "grid_base_channels": 16,
+  "curriculum_enabled": true,
+  "curriculum_stage_steps": [1000, 5000, 3000, 2000, 2000, 2000, 2000],
+  "curriculum_use_vocab_mask": true,
+  "curriculum_reset_gumbel_tau": true,
+  "training": {
+    "steps": 1000,
+    "pretrain_grid_steps": 7000,
+    "lr": 0.0001,
+    "grad_clip": 0.5,
+    "seed": 0,
+    "log_every": 10,
+    "ckpt_every": 0,
+    "out_dir": "",
+    "load_checkpoint": null
+  },
+  "reward": null
+}

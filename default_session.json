@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "stage": "full",
+  "grid_generator": "unet",
+  "rule_generator": "transformer",
+  "grid_size": 16,
+  "grid_latent_dim": 32,
+  "grid_start_spatial": 2,
+  "grid_base_channels": 16,
+  "max_rules": 64,
+  "num_ca_steps": 16,
+  "pretrain_num_ca_steps": 0,
+  "pretrain_policy_mix": 0.5,
+  "mode": "grid_and_rules",
+  "gumbel_tau": 0.5,
+  "gumbel_tau_start": 0.08,
+  "gumbel_tau_warmup_steps": 500,
+  "gumbel_tau_min": 0.05,
+  "gumbel_tau_max": 0.5,
+  "gumbel_tau_decay": 0.999,
+  "entropy_coef": 0.01,
+  "baseline_momentum": 0.95,
+  "ema_decay": 0.999,
+  "use_action_masking": true,
+  "grid_generator_kwargs": {
+    "latent_dim": 32,
+    "base_channels": 16,
+    "start_spatial": 2
+  },
+  "rule_generator_kwargs": {
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "ffn_mult": 2,
+    "head_bottleneck_dim": 32
+  },
+  "training": {
+    "steps": 1000,
+    "pretrain_grid_steps": 0,
+    "lr": 0.0001,
+    "grad_clip": 1.0,
+    "seed": 0,
+    "log_every": 10,
+    "ckpt_every": 0,
+    "out_dir": "",
+    "load_checkpoint": null
+  }
+}

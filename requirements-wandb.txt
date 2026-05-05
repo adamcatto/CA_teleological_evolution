@@ -1,0 +1,2 @@
+# Optional: `pip install -r requirements-wandb.txt` then `wandb login` before `python train.py --wandb`
+wandb>=0.16.0
